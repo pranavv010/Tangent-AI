@@ -147,7 +147,7 @@ def generate():
         completion = client.chat.completions.create(
             model="nvidia/nemotron-3.5-lightning-30b-a3b",
             messages=api_messages,
-            temperature=1,
+            temperature=0.2,
             top_p=0.95,
             max_tokens=16384,
             extra_body={"chat_template_kwargs": {"enable_thinking": enable_thinking}, "reasoning_budget": 16384},
