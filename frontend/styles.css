@@ -220,7 +220,7 @@ body {
     padding: 2rem;
     border-radius: var(--radius-md);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     width: 100%;
 }
@@ -234,7 +234,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     max-width: 80%;
     margin-left: auto;
-    font-size: 1rem;
+    font-size: 1.15rem;
     color: var(--color-teal-dark);
     font-weight: 500;
     white-space: pre-wrap;
@@ -249,7 +249,7 @@ body {
     border: 1px solid var(--color-border);
     max-width: 85%;
     margin-right: auto;
-    font-size: 1rem;
+    font-size: 1.15rem;
     color: var(--color-text-primary);
 }
 
@@ -283,7 +283,7 @@ body {
 }
 
 .chat-form {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     width: 100%;
     display: flex;

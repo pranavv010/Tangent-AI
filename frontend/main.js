@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const homeCards = document.querySelectorAll('.home-card');
     const pages = document.querySelectorAll('.page-view');
 
+    let hasGreeted = false;
+
     function navigateTo(targetId) {
         // Update sidebar active state
         navBtns.forEach(b => {
@@ -38,6 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 page.classList.remove('active-page');
             }
         });
+
+        if (targetId === 'page-debugger' && !hasGreeted) {
+            hasGreeted = true;
+            if (typeof triggerDynamicGreeting === 'function') {
+                triggerDynamicGreeting();
+            }
+        }
     }
 
     navBtns.forEach(btn => {
@@ -198,6 +207,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const debugChatAnchor = document.getElementById('debug-chat-anchor');
     
     let debuggerHistory = [];
+
+    async function triggerDynamicGreeting() {
+        setDebugLoading(true);
+        setDebugError('');
+        scrollToDebugBottom();
+
+        const aiBubble = document.createElement('div');
+        aiBubble.className = 'chat-message assistant markdown-body';
+        debugChatHistory.insertBefore(aiBubble, debugChatAnchor);
+
+        try {
+            const greetingPrompt = "Hello! Please introduce yourself shortly (1-2 sentences) as the Tangent AI Free Chat assistant, ready to help the user debug Blender Python scripts, procedural nodes, or answer any questions they have. Do not output any code.";
+            
+            debuggerHistory.push({ role: 'user', content: greetingPrompt });
+
+            let responseContent = await callBackendApi({ mode: 'debugger', messages: debuggerHistory }, aiBubble, scrollToDebugBottom, true);
+            debuggerHistory.push({ role: 'assistant', content: responseContent });
+            
+            scrollToDebugBottom();
+        } catch (error) {
+            setDebugError("Failed to load greeting. " + error.message);
+            aiBubble.remove();
+            debuggerHistory.pop();
+        } finally {
+            setDebugLoading(false);
+        }
+    }
 
     if (debugPromptInput) {
         debugPromptInput.addEventListener('keydown', (e) => {

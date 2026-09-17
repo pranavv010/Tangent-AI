@@ -49,6 +49,7 @@ Follow these strict rules:
 11. NEVER import unauthorized modules like os, sys, subprocess, requests, socket. ONLY use `bpy` and `math`.
 12. CRITICAL: NEVER assign values directly to node object attributes! (e.g., `node.scale = 2.0` is FATAL and will crash). You MUST assign values ONLY to input sockets via `.inputs["Socket Name"].default_value` (e.g., `node.inputs["Scale"].default_value = 2.0`).
 13. You have access to a library of pre-defined texture scripts. If the user input directly matches a texture in the library, THAT CODE DOES NOT NEED TO BE ALTERED AT ALL; output its script exactly as it is. Unless the user specifies anything more (like changing a color), ONLY THEN should you use your intelligence to edit/alter the given code from this library to fulfill the request.
+14. INTERPRET THE DESIRED TEXTURE INTELLIGENTLY. You must provide the absolute best, cleanest, most optimized procedural code with zero errors.
 
 {BLENDER_API_REF}
 
@@ -112,7 +113,7 @@ def generate():
 
     mode = data.get('mode', 'generator')
     current_system_prompt = DEBUGGER_SYSTEM_PROMPT if mode == 'debugger' else GENERATOR_SYSTEM_PROMPT
-    enable_thinking = True if mode == 'debugger' else False
+    enable_thinking = False
 
     prompt = ""
     if 'messages' in data and isinstance(data['messages'], list) and len(data['messages']) > 0:
