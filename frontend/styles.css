@@ -797,7 +797,11 @@ body[data-current-page="page-debugger"] .global-bg-reveal {
     font-weight: 700;
     margin-bottom: 1rem;
     color: var(--color-text-primary);
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.6);
+    background: #FFFFFF;
+    border-radius: 100px;
+    padding: 1rem 3rem;
+    display: inline-block;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .home-title .accent-wrapper {
