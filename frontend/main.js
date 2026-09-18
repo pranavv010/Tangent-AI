@@ -1,12 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Launch Overlay
     const overlay = document.getElementById('launch-overlay');
+    const launchTitle = document.querySelector('.launch-title');
+    const targetText = document.querySelector('.home-title .accent');
+
     setTimeout(() => {
         if (overlay) {
-            overlay.classList.add('fade-out');
-            document.body.classList.remove('pre-launch');
-            document.body.classList.add('launched');
-            setTimeout(() => overlay.remove(), 800);
+            if (launchTitle && targetText) {
+                // Calculate exact positions before adding 'launched' (while layout is static but opacity 0)
+                const launchRect = launchTitle.getBoundingClientRect();
+                const targetRect = targetText.getBoundingClientRect();
+                
+                // Calculate transform parameters based on center of both elements
+                const scale = targetRect.width / launchRect.width;
+                const translateX = (targetRect.left + targetRect.width / 2) - (launchRect.left + launchRect.width / 2);
+                const translateY = (targetRect.top + targetRect.height / 2) - (launchRect.top + launchRect.height / 2);
+                
+                // Set up the transition for morphing
+                launchTitle.style.transition = 'transform 1s cubic-bezier(0.2, 1, 0.2, 1), opacity 1s cubic-bezier(0.2, 1, 0.2, 1)';
+                launchTitle.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+                launchTitle.style.opacity = '0'; // Crossfade out
+                
+                // Hide the underline
+                const launchLine = document.querySelector('.launch-line');
+                if (launchLine) {
+                    launchLine.style.transition = 'opacity 0.5s ease';
+                    launchLine.style.opacity = '0';
+                }
+                
+                overlay.style.pointerEvents = 'none'; // Don't block clicks
+                
+                // Trigger layout fade-in
+                document.body.classList.remove('pre-launch');
+                document.body.classList.add('launched');
+                
+                setTimeout(() => {
+                    overlay.remove();
+                }, 1000);
+            } else {
+                overlay.classList.add('fade-out');
+                document.body.classList.remove('pre-launch');
+                document.body.classList.add('launched');
+                setTimeout(() => overlay.remove(), 800);
+            }
         }
     }, 2000);
 
