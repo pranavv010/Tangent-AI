@@ -806,7 +806,7 @@ body[data-current-page="page-debugger"] .global-bg-reveal {
     font-size: 4.5rem;
     font-weight: 900;
     display: inline-block;
-    background: linear-gradient(135deg, #006400 45%, #e67e22 55%);
+    background: linear-gradient(135deg, var(--color-teal-dark) 45%, #e67e22 55%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: none;
