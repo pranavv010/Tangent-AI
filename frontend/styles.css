@@ -800,6 +800,11 @@ body[data-current-page="page-debugger"] .global-bg-reveal {
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.6);
 }
 
+.home-title .accent-wrapper {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+    display: inline-block;
+}
+
 .home-title .accent {
     font-family: 'JetBrains Mono', monospace;
     font-size: 4.5rem;
@@ -808,7 +813,7 @@ body[data-current-page="page-debugger"] .global-bg-reveal {
     background: linear-gradient(135deg, var(--color-teal-dark) 45%, #e67e22 55%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+    text-shadow: none;
     margin-top: 0.5rem;
 }
 
